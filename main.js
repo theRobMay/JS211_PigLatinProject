@@ -12,23 +12,13 @@ const rl = readline.createInterface({
 
 
 const pigLatin = (answer) => {
-  // break your code into pieces and focus on one piece at a time...
-  // 1. if word begins with a vowel send to one function: adds "yay"
-  // 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
-  // 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
-  //find first vowel in word
-  //if the first vowel is first letter in string add 'yay' to the end of word
-  //if first letter of string is a consonant followed by a vowel move the first letter to end of string then add 'yay'
-  //if the strings first 2 letters are consonants move both to the end and add 'yay'
   let vowels = ['a', 'e', 'i', 'o', 'u'];
   let cleanWord = answer.trim().toLowerCase()
   let firstLetter = cleanWord.charAt(0)
-  let complexTest = cleanWord.slice(0,2)
-  let complexSplit = complexTest.slice(1)
+  let complexSplit = cleanWord.slice(1,2)
 
   if (vowels.includes(firstLetter)) {
     let vowelFirst = cleanWord + 'yay'
-    console.log(`${cleanWord} is a vowel`)
     return vowelFirst
   }
   else {
@@ -43,6 +33,11 @@ const pigLatin = (answer) => {
       return noVowelFirst + noVowelSecond + 'ay'
     }
   }
+}
+const multiplePigLatin = (answer) => {
+  //array of single letter and 2 letter words to error handle
+  //.split using space as separator
+  //pipe words back into
 }
 
 // the first function called in the program to get an input from the user
@@ -76,6 +71,9 @@ if (typeof describe === 'function') {
     it('should lowercase and trim word before translation', () => {
       assert.equal(pigLatin('HeLlO '), 'ellohay');
       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+    });
+    it('should translate two separate words', function () {
+      assert.equal(pigLatin('car car'), 'arcay arcay');
     });
   });
 } else {
