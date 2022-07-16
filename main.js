@@ -1,90 +1,49 @@
 'use strict';
 
 // brings in the assert module for unit testing
-const assert = require('assert');
+
 // brings in the readline module to access the command line
-const readline = require('readline');
+
+
 // use the readline module to print out to the command line
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 
-const pigLatin = (answer) => {
+
+const pigLatin = () => {
+  let userInput = document.getElementById("user-input").value;
+  console.log('*****',userInput)
   let vowels = ['a', 'e', 'i', 'o', 'u'];
-  let cleanWord = answer.trim().toLowerCase()
+  let cleanWord = userInput.trim().toLowerCase()
   let firstLetter = cleanWord.charAt(0)
   let complexSplit = cleanWord.slice(1,2)
 
   if (vowels.includes(firstLetter)) {
     let vowelFirst = cleanWord + 'yay'
-    return vowelFirst
+    return document.querySelector("h2").append(vowelFirst + ", ")
   }
   else {
     if (vowels.includes(complexSplit)) {
       let vowelSecondFirst = cleanWord.slice(1)
       let vowelSecondSecond = cleanWord.slice(0,1)
-      return vowelSecondFirst + vowelSecondSecond + 'ay'
+      return document.querySelector("h2").append(vowelSecondFirst + vowelSecondSecond + 'ay' +', ')
     }
     else {
       let noVowelFirst = cleanWord.slice(2)
       let noVowelSecond = cleanWord.slice(0,2)
-      return noVowelFirst + noVowelSecond + 'ay'
+      return document.querySelector("h2").append(noVowelFirst + noVowelSecond + 'ay' + ', ')
     }
   }
 }
-const multiplePigLatin = (answer) => {
-  //array of single letter and 2 letter words to error handle
+
+//const multiplePigLatin = (answer) => {
+  //array of single letter and 2-letter words to error handle
   //.split using space as separator
   //pipe words back into
-}
+//}
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
-const getPrompt = () => {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
-}
-
-// Unit Tests
-// to use them run the command: npm test main.js
-// to close them ctrl + C
-if (typeof describe === 'function') {
-
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should lowercase and trim word before translation', () => {
-      assert.equal(pigLatin('HeLlO '), 'ellohay');
-      assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    });
-    it('should translate two separate words', function () {
-      assert.equal(pigLatin('car car'), 'arcay arcay');
-    });
-  });
-} else {
-
-  getPrompt();
-
-}
-
-
-
-
 
 
 // **********
